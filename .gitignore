@@ -1,0 +1,10 @@
+node_modules/**/*
+.expo/*
+.vscode/*
+npm-debug.*
+.babelrc
+.watchmanconfig
+
+.eslintrc.js
+
+*.png
