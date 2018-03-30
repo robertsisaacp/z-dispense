@@ -64,6 +64,5 @@ RkTheme.setType('RkButton', 'dark', {
     backgroundColor: 'green',
   },
   content: {
-    opacity: 1,
   }
 });

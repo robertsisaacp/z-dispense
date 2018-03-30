@@ -5,23 +5,49 @@ import { RkButton,
 
 import { View, Text } from 'react-native';
 import styles from './styles';
-import api from '../../utils/api';
+//import api from '../../utils/api';
+
+const BASE_URL = 'http://172.20.1.79/api';
 
 class Input extends React.Component {
+  //typeMap : ['Line', 'Circle', 'Square']
   state = {
-    designType: 0,
+    designType: '',
     zHeight: 0.0,
     run: 0,
+    text: '',
   }
-  _onPressRun() {
-    api._callApi('172.20.1.79:3000', {method: 'POST', body: 'text'});
+  _onPressRun = (url, options = {}) => {
+    const fetchOptions = {
+      method: options.method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      ...options,
+    };
+
+    if (options.body) {
+      fetchOptions.body = JSON.stringify(options.body);
+    }
+
+    console.log( // eslint-disable-line
+      `${fetchOptions.method} request \nto /${url}
+${fetchOptions.body ? `with body: ${fetchOptions.body}` : ''}`);
+
+    return fetch(`${BASE_URL}/${url}`, fetchOptions)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+  run(design, zHeight){
+    return this._onPressRun('run/data', {method: 'POST', body: { design, zHeight }});
   }
   render() {
     return (
       <View style={styles.container}>
       
         <View style={styles.tabs}>
-          <RkTabView rkType='dark'>
+          <RkTabView rkType='dark'
+            onTabChanged={(designType) => this.setState({designType})}>
             <RkTabView.Tab title={'Line'}>
               <Text>Line</Text>
             </RkTabView.Tab>
@@ -33,14 +59,16 @@ class Input extends React.Component {
             </RkTabView.Tab>
           </RkTabView> 
         </View>
+
         <RkTextInput rkType='frame' 
-          label='Target:' 
-          placeholder='Z-height in mm'
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}/>
+          label='Z Height:' 
+          placeholder='0.0 mm'
+          keyboardType='numeric'
+          value={String(this.state.zHeight)}
+          onChangeText={(zHeight) => this.setState({zHeight})}/>
 
         <RkButton 
-          onPress={() => this._onPressRun()}
+          onPress={() => this.run(this.state.designType, this.state.zHeight)}
           rkType='dark'>Run
         </RkButton>
 

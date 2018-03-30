@@ -1,10 +1,12 @@
 import React from 'react';
-import { RkAvoidKeyboard } from 'react-native-ui-kitten';
+import { RkAvoidKeyboard,
+  RkCard } from 'react-native-ui-kitten';
 import { scaleModerate, scaleVertical} from './assets/Scale';
 import Input from './components/input/input';
 import { Image, 
   Keyboard,
   StyleSheet,
+  Text,
   Dimensions } from 'react-native';
 
 export default class App extends React.Component {
@@ -22,7 +24,7 @@ export default class App extends React.Component {
     let width = Dimensions.get('window').width;
 
     image = (<Image style={[styles.image, {height, width}]}
-      source={require('./assets/images/background.png')}/>);
+      source={require('./assets/splash.png')}/>);
     return image;
   }
   render() {
