@@ -10,34 +10,47 @@ import styles from './styles';
 const BASE_URL = 'http://172.20.1.79/api/run';
 
 class Input extends React.Component {
-  //typeMap : ['Line', 'Circle', 'Square']
-  state = {
-    designType: '',
-    zHeight: 0.0,
-    running: false,
-    text: '',
+
+  constructor(props){
+    super(props);
+    this.state = {
+      designType: '',
+      zHeight: 0.0,
+      isRunning: false,
+    };
   }
 
-  function _onPressRun() {
-    this.setState({ running: true });
-    fetch(BASE_URL, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        zHeight: this.state.zHeight,
-        design: this.state.designType,
-      }),
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        return response.RASPI;
-      })
-      .catch((error) => {
-        console.error(error);
+  onPressRun = async () => {
+    try {
+      const response = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "test": "test-def",
+          "args": {
+            "test-table": "test-author",
+            "data": [
+              "data-name"
+            ],
+            "limit": "1"
+          }
+        })
       });
+      const responseJson = await response.json();
+      this.setState({
+        isRunning: true,
+      });
+      return responseJson.raspi;
+    } catch (error) {
+      console.error(error);
+    }
   }
   render() {
+    if(this.state.isRunning){
+      //display information
+    }
     return (
       <View style={styles.container}>
       
