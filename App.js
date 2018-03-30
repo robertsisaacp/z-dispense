@@ -1,12 +1,10 @@
 import React from 'react';
-import { RkAvoidKeyboard,
-  RkCard } from 'react-native-ui-kitten';
+import { RkAvoidKeyboard,} from 'react-native-ui-kitten';
 import { scaleModerate, scaleVertical} from './assets/Scale';
 import Input from './components/input/input';
 import { Image, 
   Keyboard,
   StyleSheet,
-  Text,
   Dimensions } from 'react-native';
 
 export default class App extends React.Component {

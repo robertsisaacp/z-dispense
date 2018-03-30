@@ -20,33 +20,19 @@ class Input extends React.Component {
     };
   }
 
-  onPressRun = async () => {
-    try {
-      const response = await fetch(BASE_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "test": "test-def",
-          "args": {
-            "test-table": "test-author",
-            "data": [
-              "data-name"
-            ],
-            "limit": "1"
-          }
-        })
-      });
-      const responseJson = await response.json();
-      this.setState({
-        isRunning: true,
-      });
-      return responseJson.raspi;
-    } catch (error) {
-      console.error(error);
-    }
+  connect () {
+    this.ws = new WebSocket(BASE_URL);
+
+    this.ws.onopen = () => this.onConnectionOpen();
+    //this.ws.onmessage = (event) => this.onConnectionMessage(event);
+    //this.ws.onclose = () => this.onConnectionClose();
+    this.ws.sendJSON = (obj) => this.ws.send(JSON.stringify(obj));
+
+    this.setState({
+      isRunning: true
+    });
   }
+
   render() {
     if(this.state.isRunning){
       //display information
@@ -77,7 +63,7 @@ class Input extends React.Component {
           onChangeText={(zHeight) => this.setState({zHeight})}/>
 
         <RkButton 
-          onPress={() => this.run(this.state.designType, this.state.zHeight)}
+          onPress={() => this.connect()}
           rkType='dark'>Run
         </RkButton>
 
