@@ -7,39 +7,35 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 //import api from '../../utils/api';
 
-const BASE_URL = 'http://172.20.1.79/api';
+const BASE_URL = 'http://172.20.1.79/api/run';
 
 class Input extends React.Component {
   //typeMap : ['Line', 'Circle', 'Square']
   state = {
     designType: '',
     zHeight: 0.0,
-    run: 0,
+    running: false,
     text: '',
   }
-  _onPressRun = (url, options = {}) => {
-    const fetchOptions = {
-      method: options.method || 'GET',
+
+  function _onPressRun() {
+    this.setState({ running: true });
+    fetch(BASE_URL, {
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      ...options,
-    };
-
-    if (options.body) {
-      fetchOptions.body = JSON.stringify(options.body);
-    }
-
-    console.log( // eslint-disable-line
-      `${fetchOptions.method} request \nto /${url}
-${fetchOptions.body ? `with body: ${fetchOptions.body}` : ''}`);
-
-    return fetch(`${BASE_URL}/${url}`, fetchOptions)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
-  run(design, zHeight){
-    return this._onPressRun('run/data', {method: 'POST', body: { design, zHeight }});
+      body: JSON.stringify({
+        zHeight: this.state.zHeight,
+        design: this.state.designType,
+      }),
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        return response.RASPI;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   render() {
     return (
