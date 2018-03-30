@@ -7,7 +7,7 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 //import api from '../../utils/api';
 
-const BASE_URL = 'http://172.20.1.79/api/run';
+const BASE_URL = 'http://172.20.1.79:3000';
 
 class Input extends React.Component {
 
@@ -31,6 +31,7 @@ class Input extends React.Component {
     this.setState({
       isRunning: true
     });
+    this.ws.send('test send');
   }
 
   render() {
