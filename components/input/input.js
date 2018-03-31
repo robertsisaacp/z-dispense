@@ -5,9 +5,7 @@ import { RkButton,
 
 import { View, Text } from 'react-native';
 import styles from './styles';
-//import api from '../../utils/api';
 
-const BASE_URL = 'http://172.20.1.79:3000';
 
 class Input extends React.Component {
 
@@ -17,13 +15,23 @@ class Input extends React.Component {
       designType: '',
       zHeight: 0.0,
       isRunning: false,
+      open: false,
+      connected: false
     };
+    this.ws = new WebSocket('ws://172.20.1.79:3000');
+
+    this.ws.onopen = () => {
+      this.setState({connected: true});
+    };
+    this.test = this.test.bind(this);
   }
-
+  test () {
+    if (this.state.connected) {
+      this.ws.send("it worked!");
+    }
+  }
   connect () {
-    this.ws = new WebSocket(BASE_URL);
 
-    this.ws.onopen = () => this.onConnectionOpen();
     //this.ws.onmessage = (event) => this.onConnectionMessage(event);
     //this.ws.onclose = () => this.onConnectionClose();
     this.ws.sendJSON = (obj) => this.ws.send(JSON.stringify(obj));
@@ -31,7 +39,6 @@ class Input extends React.Component {
     this.setState({
       isRunning: true
     });
-    this.ws.send('test send');
   }
 
   render() {
@@ -64,7 +71,7 @@ class Input extends React.Component {
           onChangeText={(zHeight) => this.setState({zHeight})}/>
 
         <RkButton 
-          onPress={() => this.connect()}
+          onPress={() => this.test()}
           rkType='dark'>Run
         </RkButton>
 
