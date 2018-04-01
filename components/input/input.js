@@ -18,7 +18,7 @@ class Input extends React.Component {
       open: false,
       connected: false
     };
-    this.ws = new WebSocket('ws://172.20.1.79:3000');
+    this.ws = new WebSocket('ws://172.20.1.79:8080');
 
     this.ws.onopen = () => {
       this.setState({connected: true});
