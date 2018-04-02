@@ -26,6 +26,7 @@ class Input extends React.Component {
     this.test = this.test.bind(this);
   }
   test () {
+    console.log('test message');
     if (this.state.connected) {
       this.ws.send("it worked!");
     }

@@ -7,6 +7,40 @@ var http = require('http').createServer(handler); //require http server, and cre
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
 
+var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
+var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
+
+var Gpio = require('pigpio').Gpio, //include pigpio to interact with the GPIO
+  ledRed = new Gpio(4, {mode: Gpio.OUTPUT}), //use GPIO pin 4 as output for RED
+  ledGreen = new Gpio(17, {mode: Gpio.OUTPUT}), //use GPIO pin 17 as output for GREEN
+  ledBlue = new Gpio(27, {mode: Gpio.OUTPUT}), //use GPIO pin 27 as output for BLUE
+  redRGB = 0, //set starting value of RED variable to off (0 for common cathode)
+  greenRGB = 0, //set starting value of GREEN variable to off (0 for common cathode)
+  blueRGB = 0; //set starting value of BLUE variable to off (0 for common cathode)
+
+//RESET RGB LED
+ledRed.digitalWrite(0); // Turn RED LED off
+ledGreen.digitalWrite(0); // Turn GREEN LED off
+ledBlue.digitalWrite(0); // Turn BLUE LED off
+
+http.listen(8080); //listen to port 8080
+function blinkLED() { //function to start blinking
+  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
+    LED.writeSync(1); //set pin state to 1 (turn LED on)
+  } else {
+    LED.writeSync(0); //set pin state to 0 (turn LED off)
+  }
+}
+  
+function endBlink() { //function to stop blinking
+  clearInterval(blinkInterval); // Stop blink intervals
+  LED.writeSync(0); // Turn LED off
+  LED.unexport(); // Unexport GPIO to free resources
+}
+  
+setTimeout(endBlink, 5000); //stop blinking after 5 seconds
+
 http.listen(8080); //listen to port 8080
 
 function handler (req, res) { //create server
