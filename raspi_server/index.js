@@ -3,9 +3,9 @@ const WebSocketServer = require('ws').Server;
 const WebSocket = require('ws');
 
 //const connections = {};
-var http = require('http').createServer(handler); //require http server, and create server with function handler()
-var fs = require('fs'); //require filesystem module
-var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
+//var http = require('http').createServer(handler); //require http server, and create server with function handler()
+//var fs = require('fs'); //require filesystem module
+//var io = require('socket.io')(http); //require socket.io module and pass the http object (server)
 
 //var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 //var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
@@ -66,29 +66,26 @@ http.listen(8080); //listen to port 8080
 //});
 
 
-function broadcast (key, value) {
-    for (let id in connections) {
-        connections[id].send(
-            JSON.stringify({
-                key,
-                value
-            })
-        );
-    }
-}
+//function broadcast (key, value) {
+//    for (let id in connections) {
+//        connections[id].send(
+//            JSON.stringify({
+//                key,
+//                value
+//            })
+//        );
+//    }
+//}
 
-function onNewConnection (socket) {
-    let isAuthenticated = true;
-    const id = Math.random();
-    connections[id] = socket;
-
-    socket.on('message', (data) => {
-        try {
-            data = JSON.parse(data);
-            console.log(data);
-        } catch (e){
-            data = {};
-        }
+//function onNewConnection (socket) {
+//    let isAuthenticated = true;
+//    const id = Math.random();
+//    connections[id] = socket;
+//
+//    socket.on('message', (data) => {
+//      data = JSON.parse(data);
+//      console.log(data);
+//    },
 
         // disconnect client if the first message is not valid auth token
 //        if (!isAuthenticated && data.auth !== homeConfig.authToken) {
@@ -120,14 +117,13 @@ function onNewConnection (socket) {
 //        }
 //    });
 //
-    socket.on('close', () => {
-        // remove connection from the broadcast list
-        delete connections[id];
-    });
-}
+//    socket.on('close', () => {
+//        // remove connection from the broadcast list
+//        delete connections[id];
+//    }
 
 
-const wss = new WebSocketServer({ port: 3000 });
+const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
@@ -136,4 +132,3 @@ wss.on('connection', function connection(ws) {
 
   ws.send('back');
 });
-
