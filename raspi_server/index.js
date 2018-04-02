@@ -123,7 +123,7 @@ http.listen(8080); //listen to port 8080
 //    }
 
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ port: 3000 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
