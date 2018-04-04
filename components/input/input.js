@@ -6,7 +6,6 @@ import { RkButton,
 import { View, Text } from 'react-native';
 import styles from './styles';
 
-
 class Input extends React.Component {
 
   constructor(props){
@@ -26,7 +25,8 @@ class Input extends React.Component {
     this.test = this.test.bind(this);
   }
   test () {
-    console.log('test message');
+    console.log('circle, 50.0');
+    this.ws.send("it worked!");
     if (this.state.connected) {
       this.ws.send("it worked!");
     }
