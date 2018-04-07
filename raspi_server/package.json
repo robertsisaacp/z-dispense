@@ -10,6 +10,7 @@
   "author": "Isaac Roberts)",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.16.3",
     "onoff": "^3.0.1",
     "socket.io": "^2.1.0",
     "ws": "1.1.1"
