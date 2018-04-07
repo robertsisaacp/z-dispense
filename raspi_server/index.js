@@ -1,7 +1,22 @@
-'use strict';
-const WebSocketServer = require('ws').Server;
-const WebSocket = require('ws');
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+
+//'use strict';
+//const WebSocketServer = require('ws').Server;
+//const WebSocket = require('ws');
 //const connections = {};
 //var http = require('http').createServer(handler); //require http server, and create server with function handler()
 //var fs = require('fs'); //require filesystem module
@@ -24,7 +39,7 @@ const WebSocket = require('ws');
 //ledGreen.digitalWrite(0); // Turn GREEN LED off
 //ledBlue.digitalWrite(0); // Turn BLUE LED off
 
-http.listen(8080); //listen to port 8080
+//http.listen(8080); //listen to port 8080
 //function blinkLED() { //function to start blinking
 //  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
 //    LED.writeSync(1); //set pin state to 1 (turn LED on)
@@ -122,13 +137,12 @@ http.listen(8080); //listen to port 8080
 //        delete connections[id];
 //    }
 
-
-const wss = new WebSocketServer({ port: 3000 });
-
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-  });
-
-  ws.send('back');
-});
+//const wss = new WebSocketServer({ port: 3000 });
+//
+//wss.on('connection', function connection(ws) {
+//  ws.on('message', function incoming(message) {
+//    console.log('received: %s', message);
+//  });
+//
+//  ws.send('back');
+//});
