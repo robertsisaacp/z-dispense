@@ -155,7 +155,7 @@ elif res==5:
 elif res==6:
     GPIO.output(MODE_XY, RESOLUTION['1/32'])
 else:
-    print 'Bitch wat'
+    # print 'Bitch wat'
     quit()
 
 lines(lngth, height)
