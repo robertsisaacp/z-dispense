@@ -12,12 +12,13 @@ app.get('/params', callParams);
 function callParams(req, res) {
   // using spawn instead of exec, prefer a stream over a buffer
   // to avoid maxBuffer issue
+	
   var spawn = require('child_process').spawn;
   var process = spawn('python', 
     ["./python/test.py",
-    req.query.prec,    // precision
-    req.query.type,    // circle, line, ... 
-    req.query.zHeight  // in mm
+    req.query._prec,    // precision
+    req.query._type,    // circle, line, ... 
+    req.query._height  // in mm
   ]);
 
   process.stdout.on('data', function(data) {

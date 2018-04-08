@@ -1,8 +1,9 @@
 import sys
 
-prec = float(sys.argv[1])
-type = float(sys.argv[2])
-zHeight = float(sys.argv[3])
+_prec = float(sys.argv[1])
+_type = float(sys.argv[2])
+_height = float(sys.argv[3])
 
-print(str("" + prec + ", " + type + ", " + zHeight))
+print(str("" + _prec + ", " + _type + ", " + _height))
 sys.stdout.flush()
+
