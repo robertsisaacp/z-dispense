@@ -163,6 +163,8 @@ def run():
 
 if __name__ == '__main__':
     from sys import argv
+    while(True):
+        print "hi"
     # myargs = function(argv)
     # if '-i' in myargs:
     ##### do something
