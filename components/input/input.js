@@ -12,6 +12,7 @@ class Input extends React.Component {
     super(props);
     this.state = {
       designType: '',
+      precision: 0.0,
       zHeight: 0.0,
       isRunning: false,
       open: false,
@@ -72,7 +73,7 @@ class Input extends React.Component {
           onChangeText={(zHeight) => this.setState({zHeight})}/>
 
         <RkButton 
-          onPress={() => this.test()}
+          onPress={() => fetch("http://172.20.1.79:3000/params?_prec=100&_type=10&_height=100")}
           rkType='dark'>Run
         </RkButton>
 
