@@ -12,7 +12,7 @@ app.get('/params', callParams);
 function callParams(req, res) {
   var spawn = require('child_process').spawn;
   var process = spawn('python', 
-    ["./python/gpio.py",
+    ["./python/test.py",
     req.query._prec,    // precision
     req.query._type,    // circle, line, ... 
     req.query._height  // in mm
