@@ -3,10 +3,7 @@
 var express = require('express');
 var app = express();
 
-app.use(express.logger('dev'));
-app.use(app.router);
-
-require('http').createServer(app).listen(3000, function () {
+app.listen(3000, function() {
   console.log('listening on port 3000');
 })
 
@@ -22,7 +19,8 @@ function callParams(req, res) {
     req.query.type,    // circle, line, ... 
     req.query.zHeight  // in mm
   ]);
-  process.stdout.on('data', function (data) {
+
+  process.stdout.on('data', function(data) {
     res.send(data.toString());
   });
 }
