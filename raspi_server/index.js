@@ -14,7 +14,7 @@ function callParams(req, res) {
   // to avoid maxBuffer issue
   console.log('test')
   var spawn = require('child_process').spawn;
-  var process = spawn('python', 
+  var process = spawn('python3', 
     ["./python/test.py",
     req.query._prec,    // precision
     req.query._type,    // circle, line, ... 
