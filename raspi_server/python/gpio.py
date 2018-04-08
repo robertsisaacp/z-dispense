@@ -15,8 +15,7 @@ RESOLUTION = { 'Full' : (0,0,0),
                '1/16' : (0,0,1),
                '1/32' : (1,0,1) }
 
-CW = 1    # Clockwise Rotation
-CCW = 0   # Counterclockwise Rotation
+CW, CCW = 1, 0    # Rotation
 
 LIM_X = 7  # Limit Switch for X,Y,Z
 DIR_X = 20  # Direction GPIO Pin
@@ -140,27 +139,27 @@ lngth = 10000
 #                                  4. 1/8\n \
 #                                  5. 1/16\n \
 #                                  6. 1/32\n")
-file=open("results.txt","w")
+def run():
+    file=open("results.txt","w")
+    if res==1:
+        GPIO.output(MODE_XY, RESOLUTION['Full'])
+    elif res==2:
+        GPIO.output(MODE_XY, RESOLUTION['Half'])
+    elif res==3:
+        GPIO.output(MODE_XY, RESOLUTION['1/4'])
+    elif res==4:
+        GPIO.output(MODE_XY, RESOLUTION['1/8'])
+    elif res==5:
+        GPIO.output(MODE_XY, RESOLUTION['1/16'])
+    elif res==6:
+        GPIO.output(MODE_XY, RESOLUTION['1/32'])
+    else:
+        # print 'Bitch wat'
+        quit()
+    lines(lngth, height)
+    file.close()
+    GPIO.output(LED,GPIO.LOW) #inicate machine is done
 
-if res==1:
-    GPIO.output(MODE_XY, RESOLUTION['Full'])
-elif res==2:
-    GPIO.output(MODE_XY, RESOLUTION['Half'])
-elif res==3:
-    GPIO.output(MODE_XY, RESOLUTION['1/4'])
-elif res==4:
-    GPIO.output(MODE_XY, RESOLUTION['1/8'])
-elif res==5:
-    GPIO.output(MODE_XY, RESOLUTION['1/16'])
-elif res==6:
-    GPIO.output(MODE_XY, RESOLUTION['1/32'])
-else:
-    # print 'Bitch wat'
-    quit()
-
-lines(lngth, height)
-file.close()
-GPIO.output(LED,GPIO.LOW) #inicate machine is done
 
 if __name__ == '__main__':
     from sys import argv
