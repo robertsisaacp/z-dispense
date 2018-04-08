@@ -7,4 +7,5 @@ npm-debug.*
 .watchmanconfig
 
 .eslintrc.js
+.eslintrc.json
 .DS_Store
