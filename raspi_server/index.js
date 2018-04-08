@@ -24,12 +24,13 @@ http.listen(3000, function(){
  
 // E.g : http://localhost:3000/name?firstname=Mike&lastname=Will
 // so, first name = Mike and last name = Will
-var process = spawn('python',["./test.py",
-                        req.query.firstname,
-                        req.query.lastname] );
+var process = spawn('python', 'test.py')
+//var process = spawn('python',["./test.py",
+                        //req.query.firstname,
+                        //req.query.lastname] );
 
 // Takes stdout data from script which executed
 // with arguments and send this data to res object
 process.stdout.on('data', function(data) {
-    res.send(data.toString());
+    //res.send(data.toString());
 } )
