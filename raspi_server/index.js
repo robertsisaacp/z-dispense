@@ -20,8 +20,8 @@ function callParams(req, res) {
 
   // testing
   console.log("Height: " + req.query._height
-    + "Type: " + req.query._type
-    + "Precision: " + req.query._prec);
+    + "\nType: " + req.query._type
+    + "\nPrecision: " + req.query._prec);
 
   process.stdout.on('data', function(data) {
     res.send(data.toString());
