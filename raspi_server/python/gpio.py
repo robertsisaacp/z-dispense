@@ -1,4 +1,5 @@
 from time import sleep
+from sys import argv
 import RPi.GPIO as GPIO
 
 # Import the ADS1x15 module.
@@ -6,7 +7,6 @@ import Adafruit_ADS1x15
 
 # Create an ADS1115 ADC (16-bit) instance.
 adc = Adafruit_ADS1x15.ADS1115()
-
 
 RESOLUTION = { 'Full' : (0,0,0),
                'Half' : (1,0,0),
@@ -129,6 +129,12 @@ def lines(length, distance): #makes a line of a specified length, then adjusts t
         file.write("\n")
 
 lngth = 10000
+
+# arg1: precision, arg2: type, arg3: height
+prec = argv[1]
+type = argv[2]
+height = argv[3]
+
 #height = input("Desired height (mm):")
 #shape = input("Desired shape: \n1. LINE \n \
 #                                2. SQUARE \n \
@@ -139,6 +145,7 @@ lngth = 10000
 #                                  4. 1/8\n \
 #                                  5. 1/16\n \
 #                                  6. 1/32\n")
+
 def run():
     file=open("results.txt","w")
     if res==1:
@@ -165,7 +172,3 @@ if __name__ == '__main__':
     from sys import argv
     while(True):
         print "hi"
-    # myargs = function(argv)
-    # if '-i' in myargs:
-    ##### do something
-    # 

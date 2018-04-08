@@ -23,7 +23,6 @@ class Input extends React.Component {
     fetch(PI_ADDR + '/params?_prec=' + this.state.precision
       + '&_type=' + this.state.designType 
       + '&_height=' + this.state.zHeight)
-
   }
 
   render() {
