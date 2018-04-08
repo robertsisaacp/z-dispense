@@ -21,7 +21,9 @@ function callParams(req, res) {
     req.query._type,    // circle, line, ... 
     req.query._height  // in mm
   ]);
-  console.log(req.query._height)
+  console.log("Height: " + req.query._height)
+  console.log("Type: " + req.query._type)
+  console.log("Precision: " + req.query._prec)
   process.stdout.on('data', function(data) {
     res.send(data.toString());
   });

@@ -6,47 +6,26 @@ import { RkButton,
 import { View, Text } from 'react-native';
 import styles from './styles';
 
+var PI_ADDR = "http://172.20.1.79:3000";
+
 class Input extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      designType: '',
-      precision: 0.0,
-      zHeight: 0.0,
-      isRunning: false,
-      open: false,
-      connected: false
+      designType: 0,
+      precision: 1,
+      zHeight: 2,
     };
-    this.ws = new WebSocket('ws://172.20.1.79:8080');
-
-    this.ws.onopen = () => {
-      this.setState({connected: true});
-    };
-    this.test = this.test.bind(this);
   }
-  test () {
-    console.log('circle, 50.0');
-    this.ws.send("it worked!");
-    if (this.state.connected) {
-      this.ws.send("it worked!");
-    }
-  }
-  connect () {
+  sendParamsToPi() {
+    fetch(PI_ADDR + '/params?_prec=' + this.state.precision
+      + '&_type=' + this.state.designType 
+      + '&_height=' + this.state.zHeight)
 
-    //this.ws.onmessage = (event) => this.onConnectionMessage(event);
-    //this.ws.onclose = () => this.onConnectionClose();
-    this.ws.sendJSON = (obj) => this.ws.send(JSON.stringify(obj));
-
-    this.setState({
-      isRunning: true
-    });
   }
 
   render() {
-    if(this.state.isRunning){
-      //display information
-    }
     return (
       <View style={styles.container}>
       
@@ -72,8 +51,16 @@ class Input extends React.Component {
           value={String(this.state.zHeight)}
           onChangeText={(zHeight) => this.setState({zHeight})}/>
 
+        <RkTextInput rkType='frame' 
+                  label='Precision' 
+                  placeholder='0.0 mm'
+                  keyboardType='numeric'
+                  value={String(this.state.precision)}
+                  onChangeText={(precision) => this.setState({precision})}/>
+
+
         <RkButton 
-          onPress={() => fetch("http://172.20.1.79:3000/params?_prec=100&_type=10&_height=100")}
+          onPress={() => this.sendParamsToPi()}
           rkType='dark'>Run
         </RkButton>
 
