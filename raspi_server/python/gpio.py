@@ -13,8 +13,8 @@ RESOLUTION = { 'Full' : (0,0,0),
                '1/4'  : (0,1,0),
                '1/8'  : (1,1,0),
                '1/16' : (0,0,1),
-               '1/32' : (1,0,1)
-               }
+               '1/32' : (1,0,1) }
+
 CW = 1    # Clockwise Rotation
 CCW = 0   # Counterclockwise Rotation
 
@@ -130,16 +130,16 @@ def lines(length, distance): #makes a line of a specified length, then adjusts t
         file.write("\n")
 
 lngth = 10000
-height = input("Desired height (mm):")
-shape = input("Desired shape: \n1. LINE \n \
-                                2. SQUARE \n \
-                                3. CIRCLE \n")
-res = input("Desired resolution:\n1. Full\n \
-                                  2. Half\n \
-                                  3. 1/4\n \
-                                  4. 1/8\n \
-                                  5. 1/16\n \
-                                  6. 1/32\n")
+#height = input("Desired height (mm):")
+#shape = input("Desired shape: \n1. LINE \n \
+#                                2. SQUARE \n \
+#                                3. CIRCLE \n")
+#res = input("Desired resolution:\n1. Full\n \
+#                                  2. Half\n \
+#                                  3. 1/4\n \
+#                                  4. 1/8\n \
+#                                  5. 1/16\n \
+#                                  6. 1/32\n")
 file=open("results.txt","w")
 
 if res==1:
@@ -161,3 +161,10 @@ else:
 lines(lngth, height)
 file.close()
 GPIO.output(LED,GPIO.LOW) #inicate machine is done
+
+if __name__ == '__main__':
+    from sys import argv
+    # myargs = function(argv)
+    # if '-i' in myargs:
+    ##### do something
+    # 
