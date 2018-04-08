@@ -1,3 +1,3 @@
 # Z-Dispense
 
-![App Diagram](https://i.imgur.com/wPV5ooq.png)
+![App Diagram](https://i.imgur.com/U1rjPsD.png)
