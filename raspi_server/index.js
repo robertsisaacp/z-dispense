@@ -1,4 +1,3 @@
-// http://{ip}:3000/params?prec=100&type=10&zHeight=100
 
 var express = require('express');
 var app = express();
@@ -7,6 +6,8 @@ app.listen(3000, function() {
   console.log('listening on port 3000');
 })
 
+// Use the following URL example to send params:
+// http://{ip}:3000/params?_prec=100&_type=10&_height=100
 app.get('/params', callParams);
 
 function callParams(req, res) {
