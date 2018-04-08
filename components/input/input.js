@@ -6,7 +6,8 @@ import { RkButton,
 import { View, Text } from 'react-native';
 import styles from './styles';
 
-var PI_ADDR = "http://172.20.1.79:3000";
+// change this to the local IP of target Pi
+const PI_ADDR = "http://172.20.1.79:3000"; 
 
 class Input extends React.Component {
 
