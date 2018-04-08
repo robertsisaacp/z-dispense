@@ -58,7 +58,6 @@ class Input extends React.Component {
                   value={String(this.state.precision)}
                   onChangeText={(precision) => this.setState({precision})}/>
 
-
         <RkButton 
           onPress={() => this.sendParamsToPi()}
           rkType='dark'>Run
