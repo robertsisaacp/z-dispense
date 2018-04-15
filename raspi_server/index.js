@@ -26,4 +26,4 @@ function callParams(req, res) {
     if (err) throw (err);
     console.log('results: %j', results);
   });
-}
+};
