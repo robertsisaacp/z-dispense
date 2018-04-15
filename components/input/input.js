@@ -14,15 +14,15 @@ class Input extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      designType: 0,
-      precision: 1,
-      zHeight: 2,
+      prec: 1,
+      type: 0,
+      height: 2,
     };
   }
   sendParamsToPi() {
-    fetch(PI_ADDR + '/params?prec=' + this.state.precision
-      + '&type=' + this.state.designType 
-      + '&height=' + this.state.zHeight)
+    fetch(PI_ADDR + '/params?prec=' + this.state.prec
+      + '&type=' + this.state.type 
+      + '&height=' + this.state.height)
   }
 
   render() {
@@ -31,14 +31,14 @@ class Input extends React.Component {
       
         <View style={styles.tabs}>
           <RkTabView rkType='dark'
-            onTabChanged={(designType) => this.setState({designType})}>
-            <RkTabView.Tab title={'Line'}>
+            onTabChanged={(type) => this.setState({type})}>
+            <RkTabView.Tab title={0}>
               <Text>Line</Text>
             </RkTabView.Tab>
-            <RkTabView.Tab title={'Circle'}>
+            <RkTabView.Tab title={1}>
               <Text>Circle</Text>
             </RkTabView.Tab>
-            <RkTabView.Tab title={'Square'}>
+            <RkTabView.Tab title={3}>
               <Text>Square</Text>
             </RkTabView.Tab>
           </RkTabView> 
@@ -48,15 +48,15 @@ class Input extends React.Component {
           label='Z Height:' 
           placeholder='0.0 mm'
           keyboardType='numeric'
-          value={String(this.state.zHeight)}
-          onChangeText={(zHeight) => this.setState({zHeight})}/>
+          value={String(this.state.height)}
+          onChangeText={(height) => this.setState({height})}/>
 
         <RkTextInput rkType='frame' 
                   label='Precision' 
                   placeholder='0.0 mm'
                   keyboardType='numeric'
-                  value={String(this.state.precision)}
-                  onChangeText={(precision) => this.setState({precision})}/>
+                  value={String(this.state.prec)}
+                  onChangeText={(prec) => this.setState({prec})}/>
 
         <RkButton 
           onPress={() => this.sendParamsToPi()}
