@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(22, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
+GPIO.setup(22, GPIO.OUT)
 
 prec = float(sys.argv[1])
 type = float(sys.argv[2])

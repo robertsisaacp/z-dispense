@@ -12,23 +12,6 @@ app.get('/params', callParams);
 var PythonShell = require('python-shell');
 
 function callParams(req, res) {
-//  var spawn = require('child_process').spawn;
-//  var process = spawn('python', 
-//    ["./python/gpio.py",
-//    req.query._prec,    // precision
-//    req.query._type,    // circle, line, ... 
-//    req.query._height  // in mm
-//  ]);
-//
-//  // testing
-//  console.log("Height: " + req.query._height
-//    + "\nType: " + req.query._type
-//    + "\nPrecision: " + req.query._prec);
-//
-//  process.stdout.on('data', function(data) {
-//    res.send(data.toString());
-//  });
-//}
   var options = {
   //  pythonPath: 'path/to/python',
     pythonOptions: ['-u'], // get print results in real-time
@@ -39,7 +22,6 @@ function callParams(req, res) {
       req.query._height  // in mm
     ]
   };
-
   PythonShell.run('test.py', options, function (err, results) {
     if (err) throw (err);
     console.log('results: %j', results);
