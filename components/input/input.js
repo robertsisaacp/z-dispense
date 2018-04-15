@@ -20,9 +20,9 @@ class Input extends React.Component {
     };
   }
   sendParamsToPi() {
-    fetch(PI_ADDR + '/params?_prec=' + this.state.precision
-      + '&_type=' + this.state.designType 
-      + '&_height=' + this.state.zHeight)
+    fetch(PI_ADDR + '/params?prec=' + this.state.precision
+      + '&type=' + this.state.designType 
+      + '&height=' + this.state.zHeight)
   }
 
   render() {
