@@ -11,7 +11,7 @@ app.get('/params', callParams);
 
 var PythonShell = require('python-shell');
 
-//function callParams(req, res) {
+function callParams(req, res) {
 //  var spawn = require('child_process').spawn;
 //  var process = spawn('python', 
 //    ["./python/gpio.py",
@@ -29,19 +29,19 @@ var PythonShell = require('python-shell');
 //    res.send(data.toString());
 //  });
 //}
+  var options = {
+  //  pythonPath: 'path/to/python',
+    pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: './python/test.py',
+    args: [
+      req.query._prec,    // precision
+      req.query._type,    // circle, line, ... 
+      req.query._height  // in mm
+    ]
+  };
 
-var options = {
-//  pythonPath: 'path/to/python',
-  pythonOptions: ['-u'], // get print results in real-time
-  scriptPath: './python/test.py',
-  args: [
-    req.query._prec,    // precision
-    req.query._type,    // circle, line, ... 
-    req.query._height  // in mm
-  ]
+  PythonShell.run('test.py', options, function (err, results) {
+    if (err) throw (err);
+    console.log('results: %j', results);
+  });
 }
-
-PythonShell.run('test.py', options, function (err, results) {
-  if (err) throw (err);
-  console.log('results: %j', results);
-});
