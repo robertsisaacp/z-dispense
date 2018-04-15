@@ -2,13 +2,13 @@ var express = require('express');
 var PythonShell = require('python-shell');
 
 
-//app.listen(3000, function() {
-//  console.log('listening on port 3000');
-//})
+app.listen(3000, function() {
+  console.log('listening on port 3000');
+});
 
 // Use the following URL example to send params:
 // http://{ip}:3000/params?_prec=100&_type=10&_height=100
-// app.get('/params', callParams);
+app.get('/params', callParams);
 
 //function callParams(req, res) {
 //  var spawn = require('child_process').spawn;
@@ -32,7 +32,7 @@ var PythonShell = require('python-shell');
 var options = {
 //  pythonPath: 'path/to/python',
   pythonOptions: ['-u'], // get print results in real-time
-//  scriptPath: 'path/to/my/scripts',
+  scriptPath: './python/test.py',
   args: [
     req.query._prec,    // precision
     req.query._type,    // circle, line, ... 
