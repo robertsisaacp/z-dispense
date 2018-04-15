@@ -15,7 +15,7 @@ function callParams(req, res) {
   var options = {
   //  pythonPath: 'path/to/python',
     pythonOptions: ['-u'], // get print results in real-time
-    scriptPath: './python/test.py',
+    scriptPath: './python',
     args: [
       req.query._prec,    // precision
       req.query._type,    // circle, line, ... 
