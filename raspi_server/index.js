@@ -7,9 +7,25 @@ app.listen(3000, function() {
 
 // Use the following URL example to send params:
 // http://{ip}:3000/params?_prec=100&_type=10&_height=100
-app.get('/params', callParams);
 
 var PythonShell = require('python-shell');
+var pyshell = new PythonShell('./python/test.py')
+
+app.get('/params', callParams);
+
+pyshell.on('message', function (message) {
+  console.log(message);
+});
+
+// end the input stream and allow the process to exit
+pyshell.end(function (err,code,signal) {
+  if (err) throw err;
+  console.log('The exit code was: ' + code);
+  console.log('The exit signal was: ' + signal);
+  console.log('finished');
+  console.log('finished');
+});
+
 
 function callParams(req, res) {
   var options = {
@@ -22,8 +38,10 @@ function callParams(req, res) {
       req.query._height  // in mm
     ]
   };
+
   PythonShell.run('test.py', options, function (err, results) {
     if (err) throw (err);
     console.log('results: %j', results);
   });
 };
+
