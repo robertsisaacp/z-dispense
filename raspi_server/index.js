@@ -6,7 +6,7 @@ app.listen(3000, function() {
 });
 
 // Use the following URL example to send params:
-// http://{ip}:3000/params?_prec=100&_type=10&_height=100
+// http://{ip}:3000/params?prec=100&type=10&height=100
 
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('./python/test3.py')
