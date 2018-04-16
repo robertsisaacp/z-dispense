@@ -32,13 +32,13 @@ class Input extends React.Component {
         <View style={styles.tabs}>
           <RkTabView rkType='dark'
             onTabChanged={(type) => this.setState({type})}>
-            <RkTabView.Tab title={0}>
+            <RkTabView.Tab title={"Line"}>
               <Text>Line</Text>
             </RkTabView.Tab>
-            <RkTabView.Tab title={1}>
+            <RkTabView.Tab title={"Circle"}>
               <Text>Circle</Text>
             </RkTabView.Tab>
-            <RkTabView.Tab title={3}>
+            <RkTabView.Tab title={"Square"}>
               <Text>Square</Text>
             </RkTabView.Tab>
           </RkTabView> 
