@@ -32,7 +32,7 @@ function callParams(req, res) {
     scriptPath: './python',
     args: [
       req.query.prec,    // precision
-      req.query.type,    // circle, line, ... 
+      req.query.type,    // 0: line, 1: circle, 2: square
       req.query.height  // in mm
     ]
   };
